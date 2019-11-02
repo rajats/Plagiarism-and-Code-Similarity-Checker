@@ -1,0 +1,17 @@
+{% extends "navbar.html" %}
+{% block content %}
+
+	<div class='row'>
+	    {% for question in questions %}
+	        <a href='{% url "view-question" question.id %}'>{{ question.content }}</a>
+	    {% endfor %}
+	</div>
+	<div class="col-sm-8 col-sm-offset-2">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">My Submissions</h3>
+		  </div>
+		  
+		</div>
+	</div>
+{% endblock %}

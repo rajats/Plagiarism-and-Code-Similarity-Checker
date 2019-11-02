@@ -1,0 +1,12 @@
+from:	Ramesh Kumar <ramesh@iitgoa.ac.in>
+to:	MTech Students <masters-students@iitgoa.ac.in>,
+All PhD Students <phd@iitgoa.ac.in>
+date:	Aug 26, 2019, 12:57 PM
+subject:	Details of account number for fellowship / Scholarship[
+mailing list:	<cs-masters-2019.iitgoa.ac.in> Filter messages from this mailing list
+signed-by:	iitgoa-ac-in.20150623.gappssmtp.com
+unsubscribe:	Unsubscribe from this mailing list
+security:	 Standard encryption (TLS) Learn more
+:	Important according to Google magic.
+
+

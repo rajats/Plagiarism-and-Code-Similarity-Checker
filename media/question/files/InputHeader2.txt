@@ -1,0 +1,22 @@
+from:	Students GS Hostel IITGOA <gshostel@iitgoa.ac.in>
+to:	students@iitgoa.ac.in,
+MTech Students <masters@iitgoa.ac.in>,
+All PhD Students <phd-students@iitgoa.ac.in>
+cc:	Warden B1 block Boys Hostel <warden-b1@iitgoa.ac.in>,
+Warden B2 Block Boys Hostel <warden-b2@iitgoa.ac.in>,
+Warden B3 block Boys Hostel <warden-b3@iitgoa.ac.in>,
+Warden Girls Hostel <warden-gh@iitgoa.ac.in>,
+Neha Karanjkar <nehak@iitgoa.ac.in>,
+Hall Office Block A IIT Goa <halloffice_blocka@iitgoa.ac.in>,
+Kshirsagar Shrirang <kshirsagar.shrirang.18001@iitgoa.ac.in>,
+Manan Jain <manan.jain.18001@iitgoa.ac.in>,
+Sharad Sinha <sharad@iitgoa.ac.in>,
+Arpita Korwar <arpita@iitgoa.ac.in>,
+Amol Kamble <amol@iitgoa.ac.in>
+date:	Aug 25, 2019, 6:33 PM
+subject:	Hooks and Hangers
+mailing list:	<cs-masters-2019.iitgoa.ac.in> Filter messages from this mailing list
+signed-by:	iitgoa-ac-in.20150623.gappssmtp.com
+unsubscribe:	Unsubscribe from this mailing list
+security:	 Standard encryption (TLS) Learn more
+:	Important according to Google magic.

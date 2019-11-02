@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block navbar %}
+    <nav class="navbar navbar-default navbar-fixed-top" style="background:#F0F0F0 !important">
+      <div class="container">
+        <div class="navbar-header">
+          Plagiarism Checking and Code Analysis
+        </div>
+        
+        {% if user.is_authenticated %}
+          <div class="navbar-form navbar-right">
+            <a class="btn btn-md btn-success" href='{% url "signout" %}' role="button">Sign Out</a>
+          </div>
+        {% endif %}
+      </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+{% endblock %}
