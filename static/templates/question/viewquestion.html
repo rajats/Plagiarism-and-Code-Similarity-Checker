@@ -5,10 +5,10 @@
 		<h3>{{ question.content }}</h3>
 		<h4>Deadline for submission : {{ question.deadline }}</h4>
 		<h4><p align="right">added on:{{ question.timestamp }}</p></h4>
-		<hr/>
+		<hr>
 		{% if not instructor %}
 			<a class="btn btn-md btn-success pull-right" href='{% url "add-submission" question.id %}' role="button">Submit</a>
-				<hr/> 
+				<hr> 
 			{% for submission in my_submission %}
 				<h4><a href="{{ submission.file_link }}">{{ submission.student.user }}</a></h4>
 			{% endfor %}
@@ -16,7 +16,15 @@
 		{% elif instructor %}
 			<h3>Submissions</h3>
 			{% for submission in submissions %}
-				<h4><a href="{{ submission.file_link }}">Submitted by: {{ submission.student.user }}</a></h4>
+				<div class="row">
+					<div class="col-sm-10">
+						<h4><a href="{{ submission.file_link }}">Submitted by: {{ submission.student.user }}</a></h4>
+					</div>
+					<div class="col-sm-2">
+						<a class="btn btn-md btn-success pull-right" href='{% url "compare-submission" question.id submission.id %}' role="button">Comapre</a>
+					</div>
+				</div>
+				<hr>
 			{% endfor %}
 		{% endif %}
 {% endif %}
