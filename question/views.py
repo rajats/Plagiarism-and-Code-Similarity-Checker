@@ -52,13 +52,12 @@ def add_submission(request, question_id):
 		question = Question.objects.get(id=question_id)
 		user = RegUser.objects.get(user=request.user)
 		form = StudentSubmissionForm(request.POST or None, request.FILES or None)
-
 		if form.is_valid():
 			submission = form.cleaned_data['submission']
 			try:
 				obj = StudentSubmission.objects.get(question=question,student=user)
 				obj.submission = submission
-				obj.save
+				obj.save()
 				messages.success(request, 'Your submission was updated')
 			except StudentSubmission.DoesNotExist:
 				StudentSubmission.objects.create(question=question, student=user, submission=submission, timestamp=timezone.now())
@@ -72,6 +71,8 @@ def add_submission(request, question_id):
 def compare_submission(request, question_id, submission_id):
 	if request.user.is_authenticated and RegUser.objects.get(user=request.user).instructor:
 		context = {}
+		code1 = StudentSubmission.objects.get(id=submission_id).submission
+		print (code1.read())
 		form = SubmissionComparisonForm(question_id, submission_id, request.POST or None)
 		if form.is_valid():
 			pass
