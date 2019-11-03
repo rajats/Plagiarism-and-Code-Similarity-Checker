@@ -90,7 +90,6 @@ def compare_submission(request, question_id, submission_id):
 			k_grams2 = get_k_grams(clean_code, sc_idx)
 			fp2 = winnowing(k_grams2)
 
-
 			suspicious_part_code1 = ""
 			start_set = False
 			for f1 in fp1:
@@ -105,7 +104,8 @@ def compare_submission(request, question_id, submission_id):
 			                    end = k_grams1[f1[1]][2]
 			                else:
 			                    suspicious_part_code1 += code1[start:end]
-			                    start_set = False
+			                    start = k_grams1[f1[1]][1]
+			                    end = k_grams1[f1[1]][2]
 			suspicious_part_code1 += code1[start:end]
 			#print (suspicious_part_code1)
 			#print ("------------------------------------------------------------------------------")            
@@ -126,9 +126,11 @@ def compare_submission(request, question_id, submission_id):
 			                    start = k_grams2[f2[1]][1]
 			                    end = k_grams2[f2[1]][2]
 			suspicious_part_code2 += code2[start:end]
-			print (suspicious_part_code2)
-			context['suspicious_part_code1'] = suspicious_part_code1
-			context['suspicious_part_code2'] = suspicious_part_code2
+			#print (suspicious_part_code2)
+			suspicious_part_code1 = suspicious_part_code1.replace("\t", "----")
+			suspicious_part_code2 = suspicious_part_code2.replace("\t", "----")
+			context['suspicious_part_code1'] = suspicious_part_code1.split("\n")
+			context['suspicious_part_code2'] = suspicious_part_code2.split("\n")
 
 			##################################################
 

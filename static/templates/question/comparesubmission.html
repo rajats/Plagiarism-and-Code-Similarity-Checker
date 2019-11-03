@@ -9,12 +9,22 @@
 	<div class="row">
 		<div class="col-sm-6">
 			{% if suspicious_part_code1 %}
-				<font color="green">{{ suspicious_part_code1 }}</font>
+				<p>Chances of similarity in lines for code1</p>
+				<font color="green">
+					{% for line in suspicious_part_code1 %}
+  						{{ line }}<br/>
+					{% endfor %}
+				</font>
 			{% endif %}
 		</div>
 		<div class="col-sm-6">
 			{% if suspicious_part_code2 %}
-				<font color="green">{{ suspicious_part_code2 }}</font>
+				<p>Chances of similarity in lines for code2</p>
+				<font color="green">
+					{% for line in suspicious_part_code2 %}
+  						{{ line }}<br/>
+					{% endfor %}
+				</font>
 			{% endif %}
 		</div>
 	</div>
