@@ -6,5 +6,17 @@
 		{{ form.as_p }}
 	<input class='btn btn-success' type='submit' value='compare'/>
 	</form> 
+	<div class="row">
+		<div class="col-sm-6">
+			{% if suspicious_part_code1 %}
+				<font color="green">{{ suspicious_part_code1 }}</font>
+			{% endif %}
+		</div>
+		<div class="col-sm-6">
+			{% if suspicious_part_code2 %}
+				<font color="green">{{ suspicious_part_code2 }}</font>
+			{% endif %}
+		</div>
+	</div>
 </div>
 {% endblock %}
