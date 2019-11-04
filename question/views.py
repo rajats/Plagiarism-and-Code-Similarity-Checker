@@ -1,3 +1,6 @@
+import pickle
+import os
+
 import pygments
 import pygments.lexers
 
@@ -9,6 +12,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.utils import timezone
+from django.conf import settings
 
 from .models import Question, StudentSubmission
 from .forms import QuestionForm, StudentSubmissionForm, SubmissionComparisonForm
@@ -57,6 +61,26 @@ def add_submission(request, question_id):
 		form = StudentSubmissionForm(request.POST or None, request.FILES or None)
 		if form.is_valid():
 			submission = form.cleaned_data['submission']
+			###################creating universal dictionary of all fingerprints##########################
+			code = submission.read().decode("utf-8")
+			code_fingerprints, _ = get_fingerprints_k_grams(code)
+			try:
+				fingerprints_dict = pickle.load(open("FingerprintsToCode.pkl", "rb"))
+				print(len(fingerprints_dict))
+				for k in fingerprints_dict:
+					if len(fingerprints_dict[k]) != 1:
+						print (fingerprints_dict[k])
+			except IOError as e:
+				print("no pickle")
+				fingerprints_dict = {}	
+			for fingerprint in code_fingerprints:
+				if (fingerprint[0], question.id) in fingerprints_dict:
+					fingerprints_dict[(fingerprint[0], question.id)].append(str(request.user))
+				else:
+					fingerprints_dict[(fingerprint[0], question.id)] = [str(request.user)]
+			pickle.dump(fingerprints_dict, open("FingerprintsToCode.pkl", "wb"))
+			##############################################################################################
+
 			try:
 				obj = StudentSubmission.objects.get(question=question,student=user)
 				obj.submission = submission
@@ -65,6 +89,7 @@ def add_submission(request, question_id):
 			except StudentSubmission.DoesNotExist:
 				StudentSubmission.objects.create(question=question, student=user, submission=submission, timestamp=timezone.now())
 				messages.success(request, 'Your submission was added')
+
 			return HttpResponseRedirect('/student/')
 		context = {'form':form}
 		return render(request, "question/addsubmission.html",context)
@@ -80,57 +105,18 @@ def compare_submission(request, question_id, submission_id):
 			chosen_sub_id = form.cleaned_data['choose_submissions']
 			code2 = StudentSubmission.objects.get(id=chosen_sub_id).submission.read().decode("utf-8") 
 			###################Plagiarism logic###############
-			tkns, sc_idx = tokenize_code(code1)
-			clean_code= clean(tkns)
-			k_grams1 = get_k_grams(clean_code, sc_idx)
-			fp1 = winnowing(k_grams1)
+			fp1, k_grams1 = get_fingerprints_k_grams(code1)
+			fp2, k_grams2 = get_fingerprints_k_grams(code2)
 
-			tkns, sc_idx = tokenize_code(code2)
-			clean_code= clean(tkns)
-			k_grams2 = get_k_grams(clean_code, sc_idx)
-			fp2 = winnowing(k_grams2)
-
-			suspicious_part_code1 = ""
-			start_set = False
-			for f1 in fp1:
-			    for f2 in fp2:
-			        if f1[0] == f2[0]:
-			            if not start_set:
-			                start_set = True
-			                start = k_grams1[f1[1]][1]
-			                end = k_grams1[f1[1]][2]
-			            else:
-			                if k_grams1[f1[1]][1] < end:
-			                    end = k_grams1[f1[1]][2]
-			                else:
-			                    suspicious_part_code1 += code1[start:end]
-			                    start = k_grams1[f1[1]][1]
-			                    end = k_grams1[f1[1]][2]
-			suspicious_part_code1 += code1[start:end]
-			#print (suspicious_part_code1)
-			#print ("------------------------------------------------------------------------------")            
-			suspicious_part_code2 = ""
-			start_set = False
-			for f1 in fp1:
-			    for f2 in fp2:
-			        if f1[0] == f2[0]:
-			            if not start_set:
-			                start_set = True
-			                start = k_grams2[f2[1]][1]
-			                end = k_grams2[f2[1]][2]
-			            else:
-			                if k_grams2[f2[1]][1] < end:
-			                    end = k_grams2[f2[1]][2]
-			                else:
-			                    suspicious_part_code2 += code2[start:end]
-			                    start = k_grams2[f2[1]][1]
-			                    end = k_grams2[f2[1]][2]
-			suspicious_part_code2 += code2[start:end]
-			#print (suspicious_part_code2)
+			suspicious_part_code1, matched_fp = get_suspicious_lines(code1, fp1, fp2, k_grams1)
+			suspicious_part_code2, matched_fp = get_suspicious_lines(code2, fp2, fp1, k_grams2)
+			
 			suspicious_part_code1 = suspicious_part_code1.replace("\t", "----")
 			suspicious_part_code2 = suspicious_part_code2.replace("\t", "----")
 			context['suspicious_part_code1'] = suspicious_part_code1.split("\n")
 			context['suspicious_part_code2'] = suspicious_part_code2.split("\n")
+			context['code1_similarity_percentage'] = (matched_fp/len(fp1)) * 100
+			context['code2_similarity_percentage'] = (matched_fp/len(fp2)) * 100
 
 			##################################################
 
@@ -138,6 +124,34 @@ def compare_submission(request, question_id, submission_id):
 		return render(request, "question/comparesubmission.html",context)
 	else:
 		raise Http404
+
+def get_fingerprints_k_grams(code):
+	tkns, sc_idx = tokenize_code(code)
+	clean_code= clean(tkns)
+	k_grams = get_k_grams(clean_code, sc_idx)
+	return winnowing(k_grams), k_grams
+
+def get_suspicious_lines(code, fp1, fp2, k_grams1):
+	suspicious_part_code = ""
+	start_set = False
+	matched_fp = 0
+	for f1 in fp1:
+	    for f2 in fp2:
+	        if f1[0] == f2[0]:
+	        	matched_fp += 1
+	        	if not start_set:
+	        		start_set = True
+	        		start = k_grams1[f1[1]][1]
+	        		end = k_grams1[f1[1]][2]
+	        	else:
+	        		if k_grams1[f1[1]][1] < end:
+	        			end = k_grams1[f1[1]][2]
+	        		else:
+	        			suspicious_part_code += code[start:end]
+	        			start = k_grams1[f1[1]][1]
+	        			end = k_grams1[f1[1]][2]
+	suspicious_part_code += code[start:end]
+	return suspicious_part_code, matched_fp
 
 
 def get_k_grams(text, sc_idx, k=20):
