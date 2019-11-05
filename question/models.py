@@ -19,6 +19,8 @@ class StudentSubmission(models.Model):
 	question = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL) 
 	student = models.ForeignKey(RegUser, null=True, blank=True, on_delete=models.SET_NULL)
 	submission = models.FileField(upload_to="studentsubmission/files/")
+	fingerprints = models.TextField(null=True)
+	kgrams = models.TextField(null=True)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True, null=True, blank=True)
 
 	def file_link(self):

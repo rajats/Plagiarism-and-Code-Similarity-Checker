@@ -1,10 +1,12 @@
 import pickle
-import os
+import ast
 
 import pygments
 import pygments.lexers
 
 from datetime import datetime
+
+from collections import Counter
 
 from django.shortcuts import render
 from django.shortcuts import Http404, HttpResponseRedirect
@@ -13,6 +15,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.utils import timezone
 from django.conf import settings
+from django.http import JsonResponse
+from django.contrib.auth.models import User
 
 from .models import Question, StudentSubmission
 from .forms import QuestionForm, StudentSubmissionForm, SubmissionComparisonForm
@@ -63,13 +67,9 @@ def add_submission(request, question_id):
 			submission = form.cleaned_data['submission']
 			###################creating universal dictionary of all fingerprints##########################
 			code = submission.read().decode("utf-8")
-			code_fingerprints, _ = get_fingerprints_k_grams(code)
+			code_fingerprints, k_grams = get_fingerprints_k_grams(code)
 			try:
 				fingerprints_dict = pickle.load(open("FingerprintsToCode.pkl", "rb"))
-				print(len(fingerprints_dict))
-				for k in fingerprints_dict:
-					if len(fingerprints_dict[k]) != 1:
-						print (fingerprints_dict[k])
 			except IOError as e:
 				print("no pickle")
 				fingerprints_dict = {}	
@@ -80,14 +80,15 @@ def add_submission(request, question_id):
 					fingerprints_dict[(fingerprint[0], question.id)] = [str(request.user)]
 			pickle.dump(fingerprints_dict, open("FingerprintsToCode.pkl", "wb"))
 			##############################################################################################
-
 			try:
 				obj = StudentSubmission.objects.get(question=question,student=user)
 				obj.submission = submission
+				obj.fingerprints = code_fingerprints
+				obj.kgrams = k_grams
 				obj.save()
 				messages.success(request, 'Your submission was updated')
 			except StudentSubmission.DoesNotExist:
-				StudentSubmission.objects.create(question=question, student=user, submission=submission, timestamp=timezone.now())
+				StudentSubmission.objects.create(question=question, student=user, submission=submission, fingerprints=code_fingerprints, kgrams=k_grams, timestamp=timezone.now())
 				messages.success(request, 'Your submission was added')
 
 			return HttpResponseRedirect('/student/')
@@ -117,11 +118,36 @@ def compare_submission(request, question_id, submission_id):
 			context['suspicious_part_code2'] = suspicious_part_code2.split("\n")
 			context['code1_similarity_percentage'] = (matched_fp/len(fp1)) * 100
 			context['code2_similarity_percentage'] = (matched_fp/len(fp2)) * 100
-
 			##################################################
-
 		context['form'] = form
 		return render(request, "question/comparesubmission.html",context)
+	else:
+		raise Http404
+
+def analyse_similarities(request, question_id, submission_id):
+	if request.user.is_authenticated and RegUser.objects.get(user=request.user).instructor:
+		context = {}
+		question = Question.objects.get(id=question_id)
+		sub_obj = StudentSubmission.objects.get(id=submission_id)
+		code = sub_obj.submission.read().decode("utf-8") 
+		fingerprints = ast.literal_eval(sub_obj.fingerprints)
+		fingerprints_dict = pickle.load(open("FingerprintsToCode.pkl", "rb"))
+		users_corresponsding_to_fp = []
+		print (question_id)
+		for fp in fingerprints:
+			if (fp[0], question_id) in fingerprints_dict:
+		 		users_corresponsding_to_fp += fingerprints_dict[(fp[0], question_id)]
+		users_corresponsding_to_fp = list(filter(lambda x: x != str(sub_obj.student.user), users_corresponsding_to_fp))
+		count_users_dict = Counter(users_corresponsding_to_fp)
+		labels = list(count_users_dict.keys())
+		sim_percentage = []
+		for label in labels:
+			stud = RegUser.objects.get(user=User.objects.get(username=label))
+			sub_obj = StudentSubmission.objects.get(question=question,student=stud)
+			fingerprints = ast.literal_eval(sub_obj.fingerprints)
+			sim_percentage.append((count_users_dict[label]/len(fingerprints))*100)
+		data = {"labels":labels, "similarityPercentage": sim_percentage}
+		return JsonResponse(data)
 	else:
 		raise Http404
 
