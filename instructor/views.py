@@ -11,7 +11,6 @@ def instructor_home(request):
 		instructor = RegUser.objects.get(user=request.user)
 		questions = Question.objects.filter(createdby=instructor)
 		context['questions'] = questions
-		messages.success(request,"You are a instructor")
 	else:
 		raise Http404
 	return render(request, "instructor/myquestions.html", context)

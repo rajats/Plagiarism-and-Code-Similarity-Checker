@@ -13,7 +13,6 @@ def student_home(request):
 		my_submissions = StudentSubmission.objects.filter(student=student)
 		context['questions'] = questions
 		context['my_submissions'] = my_submissions
-		messages.success(request,"You are a student")
 	else:
 		raise Http404
 	return render(request, "student/studenthome.html", context)

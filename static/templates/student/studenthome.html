@@ -1,10 +1,13 @@
 {% extends "navbar.html" %}
 {% block content %}
-
-	<div class='row'>
-	    {% for question in questions %}
-	        <a href='{% url "view-question" question.id %}'>{{ question.content }}</a>
-	    {% endfor %}
+	<div class="container">
+		<div class='row'>
+			<ul>
+		    	{% for question in questions %}
+		        	<li><a href='{% url "view-question" question.id %}'>{{ question.content }}</a></li>
+		        	<hr/>
+		    	{% endfor %}
+			</ul>
+		</div>
 	</div>
-
 {% endblock %}

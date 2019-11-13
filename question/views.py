@@ -133,7 +133,6 @@ def analyse_similarities(request, question_id, submission_id):
 		fingerprints = ast.literal_eval(sub_obj.fingerprints)
 		fingerprints_dict = pickle.load(open("FingerprintsToCode.pkl", "rb"))
 		users_corresponsding_to_fp = []
-		print (question_id)
 		for fp in fingerprints:
 			if (fp[0], question_id) in fingerprints_dict:
 		 		users_corresponsding_to_fp += fingerprints_dict[(fp[0], question_id)]
@@ -146,7 +145,13 @@ def analyse_similarities(request, question_id, submission_id):
 			sub_obj = StudentSubmission.objects.get(question=question,student=stud)
 			fingerprints = ast.literal_eval(sub_obj.fingerprints)
 			sim_percentage.append((count_users_dict[label]/len(fingerprints))*100)
+		for reg_usr in RegUser.objects.all():
+			if not reg_usr.instructor and str(reg_usr.user) not in labels:
+				labels.append(str(reg_usr.user))
+				sim_percentage.append(0)
 		data = {"labels":labels, "similarityPercentage": sim_percentage}
+		print(data)
+		print(labels)
 		return JsonResponse(data)
 	else:
 		raise Http404
@@ -161,6 +166,7 @@ def get_suspicious_lines(code, fp1, fp2, k_grams1):
 	suspicious_part_code = ""
 	start_set = False
 	matched_fp = 0
+	start, end = 0, 0
 	for f1 in fp1:
 	    for f2 in fp2:
 	        if f1[0] == f2[0]:

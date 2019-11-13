@@ -19,6 +19,7 @@
 				<div class="row">
 					<div class="col-sm-8">
 						<h4><a href="{{ submission.file_link }}">Submitted by: {{ submission.student.user }}</a></h4>
+						<p>on {{ submission.timestamp }}</p>
 					</div>
 					<div class="col-sm-2">
 						<button class="btn btn-md btn-success analyse-sim" onclick="plot({{ question.id }},{{ submission.id }})" role="button">Analyse Similarities</button>
