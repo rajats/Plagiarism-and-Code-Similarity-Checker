@@ -142,11 +142,11 @@ def analyse_similarities(request, question_id, submission_id):
 		sim_percentage = []
 		for label in labels:
 			stud = RegUser.objects.get(user=User.objects.get(username=label))
-			sub_obj = StudentSubmission.objects.get(question=question,student=stud)
-			fingerprints = ast.literal_eval(sub_obj.fingerprints)
+			stud_sub_obj = StudentSubmission.objects.get(question=question,student=stud)
+			fingerprints = ast.literal_eval(stud_sub_obj.fingerprints)
 			sim_percentage.append((count_users_dict[label]/len(fingerprints))*100)
 		for reg_usr in RegUser.objects.all():
-			if not reg_usr.instructor and str(reg_usr.user) not in labels:
+			if not reg_usr.instructor and str(reg_usr.user) != str(sub_obj.student.user) and str(reg_usr.user) not in labels:
 				labels.append(str(reg_usr.user))
 				sim_percentage.append(0)
 		data = {"labels":labels, "similarityPercentage": sim_percentage}

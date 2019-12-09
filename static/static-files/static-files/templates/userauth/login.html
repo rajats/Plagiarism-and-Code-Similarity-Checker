@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "navbar.html" %}
 {% block content %}
 	<div class="col-sm-6 col-sm-offset-3">
 		<form method='POST' action=''> {% csrf_token %}
-			{{ form }}
+			{{ form.as_p }}
 			<div class="form-actions">
 		        <button type="submit" class="btn btn-primary">Login</button>
 		    </div>

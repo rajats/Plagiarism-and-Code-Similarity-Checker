@@ -1,0 +1,10 @@
+{% extends "navbar.html" %}
+{% block content %}
+<div align="center"><h2>Add Question</h2></div>
+<div class="col-sm-12 col-sm-offset-3">
+	<form method='POST' action='' enctype="multipart/form-data"> {% csrf_token %}
+		{{ form.as_p }}
+	<input class='btn btn-success' type='submit' value='add'/>
+	</form> 
+</div>
+{% endblock %}
