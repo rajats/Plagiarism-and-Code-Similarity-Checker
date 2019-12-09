@@ -1,1 +1,1 @@
-web: gunicorn codesimilarity.wsgi --log-file -
+web: gunicorn codesimilarity.wsgi
