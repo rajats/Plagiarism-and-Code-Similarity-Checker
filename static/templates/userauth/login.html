@@ -2,7 +2,7 @@
 {% block content %}
 	<h3>Login as instructor with username instructor and password iplagiarism</h3> 
 	<h3>or</h3>
-	<a href='{% url "check-2-sim" %}'><font color="green"><h3>Try similarity between 2 codes without Login</h3></font></a>
+	<a href='{% url "check-2-sim" %}'><font color="green"><h3>Try similarity between 2 Python codes without Login</h3></font></a>
 	<div class="col-sm-6 col-sm-offset-3">
 		<form method='POST' action=''> {% csrf_token %}
 			{{ form.as_p }}
