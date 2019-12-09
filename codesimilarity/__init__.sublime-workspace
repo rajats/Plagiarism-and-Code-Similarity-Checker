@@ -1,0 +1,418 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"S",
+				"SECRET_KEY"
+			],
+			[
+				"obj",
+				"objects"
+			],
+			[
+				"g",
+				"get"
+			],
+			[
+				"re",
+				"request"
+			],
+			[
+				"ana",
+				"analyse-similarities"
+			],
+			[
+				"cou",
+				"Counter"
+			],
+			[
+				"sub",
+				"sub_obj"
+			],
+			[
+				"fin",
+				"fingerprints"
+			],
+			[
+				"finger",
+				"fingerprints"
+			],
+			[
+				"k_gr",
+				"k_grams"
+			],
+			[
+				"k",
+				"k_grams"
+			],
+			[
+				"use",
+				"users_corresponsding_to_fp"
+			],
+			[
+				"quest",
+				"question_id"
+			],
+			[
+				"mat",
+				"matched_fp"
+			],
+			[
+				"get",
+				"get_suspicious_lines"
+			],
+			[
+				"f",
+				"fingerprints_dict"
+			],
+			[
+				"finge",
+				"fingerprints_dict"
+			],
+			[
+				"code",
+				"code_fingerprints"
+			],
+			[
+				"fingerprints",
+				"fingerprints_dict"
+			],
+			[
+				"k_",
+				"k_grams1"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
+				"ST",
+				"StudentSubmissionForm"
+			],
+			[
+				"stude",
+				"StudentSubmission"
+			],
+			[
+				"ques",
+				"question_id"
+			],
+			[
+				"compare",
+				"compare_question"
+			],
+			[
+				"cc",
+				"cc_part"
+			],
+			[
+				"fro",
+				"from_part"
+			],
+			[
+				"date",
+				"date_index"
+			],
+			[
+				"to",
+				"to_part"
+			],
+			[
+				"from",
+				"from_part"
+			],
+			[
+				"flist",
+				"flist1"
+			],
+			[
+				"random",
+				"random_name"
+			],
+			[
+				"ra",
+				"random_name_generator"
+			],
+			[
+				"str",
+				"string"
+			],
+			[
+				"rand",
+				"random_string_gen"
+			],
+			[
+				"string",
+				"string_gen"
+			],
+			[
+				"c",
+				"c_times"
+			],
+			[
+				"e",
+				"elapsed"
+			],
+			[
+				"ti",
+				"time_elapsed"
+			],
+			[
+				"s",
+				"sizes_in_KB"
+			],
+			[
+				"ch",
+				"char_times"
+			],
+			[
+				"inpu",
+				"input_header_to"
+			],
+			[
+				"inp",
+				"input_header_to"
+			],
+			[
+				"in",
+				"input_header_to"
+			],
+			[
+				"out",
+				"output_header"
+			],
+			[
+				"reply",
+				"reply_header"
+			],
+			[
+				"spl",
+				"splitted_line"
+			],
+			[
+				"gues",
+				"guess_line"
+			],
+			[
+				"acc",
+				"access_array1"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"indent",
+				"Indentation: Convert to Tabs"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/rajat/plagiarism/src/codesimilarity/settings.py",
+		"/home/rajat/plagiarism/src/static/templates/twocodesimilarity/checktwocodes.html",
+		"/home/rajat/plagiarism/src/twocodesimilarity/views.py",
+		"/home/rajat/plagiarism/src/twocodesimilarity/forms.py",
+		"/home/rajat/plagiarism/src/static/templates/question/comparesubmission.html",
+		"/home/rajat/plagiarism/src/question/views.py",
+		"/home/rajat/plagiarism/src/twocodesimilarity/urls.py",
+		"/home/rajat/plagiarism/src/static/templates/userauth/login.html",
+		"/home/rajat/plagiarism/src/static/templates/navbar.html",
+		"/home/rajat/plagiarism/src/static/templates/instructor/myquestions.html",
+		"/home/rajat/plagiarism/src/static/templates/question/addquestion.html",
+		"/home/rajat/plagiarism/src/static/templates/base.html",
+		"/home/rajat/plagiarism/src/question/forms.py",
+		"/home/rajat/plagiarism/src/question/urls.py",
+		"/home/rajat/plagiarism/src/codesimilarity/urls.py",
+		"/home/rajat/plagiarism/src/requirements.txt",
+		"/home/rajat/plagiarism/src/codesimilarity/wsgi.py",
+		"/home/rajat/plagiarism/src/Procfile",
+		"/home/rajat/plagiarism/src/.gitignore",
+		"/home/rajat/plagiarism/src/student/urls.py",
+		"/home/rajat/plagiarism/src/instructor/urls.py",
+		"/home/rajat/plagiarism/src/userauth/views.py",
+		"/home/rajat/plagiarism/src/student/views.py",
+		"/home/rajat/plagiarism/src/instructor/views.py",
+		"/home/rajat/plagiarism/src/question/models.py",
+		"/home/rajat/plagiarism/src/static/templates/question/viewquestion.html",
+		"/home/rajat/plagiarism/src/static/templates/student/studenthome.html",
+		"/home/rajat/test22.py",
+		"/home/rajat/anaconda2/cachepython1.py",
+		"/home/rajat/cachepython.py",
+		"/home/rajat/plagiarism/src/userauth/forms.py",
+		"/home/rajat/plagiarism/src/instructor/models.py",
+		"/home/rajat/plagiarism/src/static/templates/question/addsubmission.html",
+		"/home/rajat/plagiarism/src/static/templates/student/addsubmission.html",
+		"/home/rajat/plagiarism/src/userauth/models.py",
+		"/home/rajat/plagiarism/src/student/models.py",
+		"/home/rajat/lab2.py",
+		"/home/rajat/anaconda2/cachepython.py",
+		"/home/rajat/gp/Document-Winnowing/winnow.py",
+		"/home/rajat/githubplag/Document-Winnowing/winnow.py",
+		"/home/rajat/plagiarism/src/codesimilarity/views.py",
+		"/media/rajat/RAJ/src/codesimilarity/settings.py",
+		"/home/rajat/Downloads/emailheader.py",
+		"/home/rajat/lab1.cpp",
+		"/home/rajat/lab3.py",
+		"/home/rajat/Downloads/cachepython.py",
+		"/home/rajat/anaconda2/lab2.py",
+		"/home/rajat/cachelab/cache1.cpp",
+		"/home/rajat/cache1.cpp",
+		"/home/rajat/5.c",
+		"/home/rajat/cache2.cpp",
+		"/home/rajat/cache.c",
+		"/home/rajat/b1.c"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"id"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "__init__.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 304.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

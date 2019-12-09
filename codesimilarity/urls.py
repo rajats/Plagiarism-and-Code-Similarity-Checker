@@ -25,6 +25,7 @@ admin.autodiscover()
 
 urlpatterns = [
     path('', signin, name="signin"),
+    path('twocodesimilarity/', include('twocodesimilarity.urls')),
     path('instructor/', include('instructor.urls')),
     path('student/', include('student.urls')),
     path('question/', include('question.urls')),

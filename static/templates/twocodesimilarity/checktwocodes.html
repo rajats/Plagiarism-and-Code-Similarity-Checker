@@ -1,0 +1,42 @@
+{% extends "navbar.html" %}
+{% block content %}
+<div align="center"><h2>Enter two codes to compare similarity</h2></div>
+<div class="col-sm-12 col-sm-offset-3">
+	<form method='POST' action='' enctype="multipart/form-data"> {% csrf_token %}
+		<div class="row">
+		    {% for field in form  %}
+		      <div class="col-sm-6">
+		        <b>{{ field.label_tag }}</b> - {{ field }} 
+		      </div>
+		    {% endfor %}
+	    </div> 
+		<input class='btn btn-success' type='submit' value='Compare'/>
+	</form>
+	<div class="row">
+		<div class="col-sm-6">
+			{% if suspicious_part_code1 %}
+				<p>Chances of similarity in lines for code1</p>
+				<font color="green">
+					{% for line in suspicious_part_code1 %}
+  						{{ line }}<br/>
+					{% endfor %}
+				</font>
+				<hr>
+<!-- 				<p>Similarity percentage: {{ code1_similarity_percentage }}</p> -->
+			{% endif %}
+		</div>
+		<div class="col-sm-6">
+			{% if suspicious_part_code2 %}
+				<p>Chances of similarity in lines for code2</p>
+				<font color="green">
+					{% for line in suspicious_part_code2 %}
+  						{{ line }}<br/>
+					{% endfor %}
+				</font>
+				<hr>
+				<p>Similarity percentage: {{ code2_similarity_percentage }}</p>
+			{% endif %}
+		</div>
+	</div> 
+</div>
+{% endblock %}
