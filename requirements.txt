@@ -1,4 +1,4 @@
-Django==2.2.8
+Django==2.2.10
 django-bootstrap-toolkit==2.15.0
 django-pygments==0.3
 djangorestframework==3.10.3
